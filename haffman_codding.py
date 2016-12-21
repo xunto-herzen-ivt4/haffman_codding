@@ -10,19 +10,19 @@ def encode(text: str):
     stack = []
     for letter, frequency in letters:
         codes[letter] = []
-        stack.append(([letter], frequency))
+        stack.append((letter, frequency/len(text)))
 
     while len(stack) > 1:
-        first, first_frequency = stack.pop()
-        second, second_frequency = stack.pop()
+        first, first_probability = stack.pop()
+        second, second_probability = stack.pop()
 
-        for a in first:
-            codes[a].insert(0, 0)
+        for letter in first:
+            codes[letter].insert(0, 0)
 
-        for a in second:
-            codes[a].insert(0, 1)
+        for letter in second:
+            codes[letter].insert(0, 1)
 
-        stack.append((first + second, first_frequency + second_frequency))
+        stack.append((first + second, first_probability + second_probability))
         stack.sort(key=lambda item: item[1], reverse=True)
 
     # Encode phrase
