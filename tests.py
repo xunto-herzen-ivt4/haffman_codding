@@ -2,6 +2,7 @@ from haffman_codding import encode, decode
 import pprint
 
 messages = [
+    (15 * "А") + (7 * "Б") + (6 * "В") + (6 * "Г") + (5 * "Д"),
     "tiis",
     "Код_Шеннона-Фано",
     '''
