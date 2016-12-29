@@ -13,7 +13,7 @@ def encode(text: str):
         stack.append((letter, frequency/len(text)))
 
     while len(stack) > 1:
-        stack.sort(key=lambda item: (item[1], len(item[0])), reverse=True)
+        stack.sort(key=lambda item: (item[1], ord(item[0][:1])), reverse=True)
         first, first_probability = stack.pop()
         second, second_probability = stack.pop()
 
