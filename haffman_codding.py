@@ -6,13 +6,14 @@ def encode(text: str):
     # Generate codes for letters in sentence
     codes = {}
 
-    letters = Counter(text).most_common()
+    letters = Counter(text).items()
     stack = []
     for letter, frequency in letters:
         codes[letter] = []
         stack.append((letter, frequency/len(text)))
 
     while len(stack) > 1:
+        stack.sort(key=lambda item: (item[1], len(item[0])), reverse=True)
         first, first_probability = stack.pop()
         second, second_probability = stack.pop()
 
@@ -23,7 +24,6 @@ def encode(text: str):
             codes[letter].insert(0, 1)
 
         stack.append((first + second, first_probability + second_probability))
-        stack.sort(key=lambda item: item[1], reverse=True)
 
     # Encode phrase
     result = []
